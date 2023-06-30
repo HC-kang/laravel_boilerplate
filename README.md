@@ -9,7 +9,7 @@
 
 ## Laravel 9 Boilerplate (with PHP8.x)
 
-A Simple Laravel Boilerplate for using in my projects. This boilerplate is based on Laravel 9 and PHP 8.x.
+- A Simple Laravel Boilerplate for using in my projects. This boilerplate is based on Laravel 9 and PHP 8.x.
 
 ## Features
 
@@ -22,3 +22,21 @@ A Simple Laravel Boilerplate for using in my projects. This boilerplate is based
 - Repository service provider for binding interfaces to repositories
 - Traits for formatting response and handling exceptions in API
 - Api routes with versioning
+
+---
+
+## 라라벨9 보일러 플레이트 (with PHP8.x)
+
+- 개인 사용을 위한 간단한 라라벨 보일러플레이트입니다. 이 보일러플레이트는 Laravel 9 및 PHP 8.2를 사용합니다.
+
+## 기능
+
+- Passport를 사용한 기본적인 인증 및 사용자 관리
+- 기본적인 이미지 업로드/관리
+- 요청 및 응답 개체에서 서비스 및 리포지토리 계층을 깔끔하게 유지하는 DTO
+- 요청에서 배열로 쉽게 변환되는 DTO
+- 비즈니스 로직을 위한 Service Layer
+- 인터페이스를 사용하는 Repository Layer
+- 리포지토리에 인터페이스를 바인딩하기 위한 Repository Service Provider
+- API별 응답 서식 지정 및 예외 처리를 위한 Traits
+- 버전 관리가 있는 API Routes
