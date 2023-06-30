@@ -4,12 +4,13 @@ namespace App\Traits;
 
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
+use Exception;
 
 trait ApiResponseTraits
 {
     public function successResponse($data = [], $code = Response::HTTP_OK)
     {
-        if ($data instanceof \Exception) {
+        if ($data instanceof Exception) {
             return $this->errorResponse($data);
         }
         return $this->successTrueResponse($data, $code);
@@ -38,7 +39,7 @@ trait ApiResponseTraits
         return response()->json($result, $code);
     }
 
-    public function errorResponse(\Exception $error, $code = Response::HTTP_BAD_REQUEST)
+    public function errorResponse(Exception $error, $code = Response::HTTP_BAD_REQUEST)
     {
         $result = [
             'success' => false,

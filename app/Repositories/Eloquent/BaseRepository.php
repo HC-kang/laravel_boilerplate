@@ -4,7 +4,6 @@ namespace App\Repositories\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Repositories\EloquentRepositoryInterface;
-use Illuminate\Support\Carbon;
 
 class BaseRepository implements EloquentRepositoryInterface
 {
@@ -25,12 +24,12 @@ class BaseRepository implements EloquentRepositoryInterface
             ->find($id, $columns);
     }
 
-    public function all($columns = array('*'),array $relations=[], $pagination = false, $perPage = 10)
+    public function all($columns = array('*'),array $relations=[], $pagination = true, $perPage = 10)
     {
         return $this->model->with($relations)->orderBy('created_at', 'desc')->get($columns);
     }
 
-    public function allPaginated(array $relations=[], $pagination = false, $perPage = 10)
+    public function allPaginated(array $relations=[], $pagination = true, $perPage = 10)
     {
         return $this->model
             ->with($relations)
@@ -47,6 +46,11 @@ class BaseRepository implements EloquentRepositoryInterface
         return $this->model->create($attributes);
     }
 
+    public function createMany(array $attributes): bool
+    {
+        return $this->model->insert($attributes);
+    }
+
     public function update(int $id, array $attributes):bool
     {
         $model = $this->findById($id);
@@ -59,7 +63,7 @@ class BaseRepository implements EloquentRepositoryInterface
         return $model->delete();
     }
 
-    public function paginate($perPages = 15)
+    public function paginate($perPages = 10)
     {
         return $this->model->paginate($perPages);
     }

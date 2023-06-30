@@ -4,14 +4,13 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +21,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'remember_token',
     ];
 
     /**
@@ -43,4 +41,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getUserRole()
+    {
+        switch ($this->role) {
+            case 3: return 'super-admin';
+            case 2: return 'admin';
+            default: return 'common-user';
+        }
+    }
+
+    public function getIsAdminAttributes()
+    {
+        return $this->role === 2 || $this->role === 3;
+    }
 }

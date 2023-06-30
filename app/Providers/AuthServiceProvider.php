@@ -29,7 +29,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::tokensCan([
             'super-admin' => 'Super Admin API Call',
             'admin'       => 'Admin API Call',
-            'normal'      => 'normal API Call',
+            'user'        => 'user API Call',
         ]);
 
         $expiresAt = now()->addDays(env('TOKEN_EXPIRE_DAYS', 1));

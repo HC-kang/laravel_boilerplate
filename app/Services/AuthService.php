@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Dtos\User\LoginUserDto;
 use App\Resources\Strings;
-
+use Exception;
 
 class AuthService
 {
@@ -17,12 +17,12 @@ class AuthService
             ];
 
             if (!auth()->attempt($credentials)) {
-                throw new \Exception(Strings::USER_LOGIN_FAILED_EXCEPTION, 99999);
+                throw new Exception(Strings::USER_LOGIN_FAILED_EXCEPTION, 99999);
             }
 
             return auth()->user();
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $e;
         }
     }

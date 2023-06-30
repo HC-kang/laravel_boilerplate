@@ -8,7 +8,9 @@ use App\Http\Requests\User\UpdateUserRequest;
 use App\Services\UserService;
 use App\Traits\ApiResponseTraits;
 use App\Traits\TokenTraits;
+use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -33,7 +35,7 @@ class UserController extends Controller
     {
         $loginUserDto = $request->toLoginUserDto();
         $result = $this->userService->loginUser($loginUserDto);
-        if ($result instanceof \Exception) {
+        if ($result instanceof Exception) {
             return $this->errorResponse($result);
         }
         return $this->respondWithToken($result);
@@ -45,22 +47,28 @@ class UserController extends Controller
         return $this->successResponse($result);
     }
 
-    public function show(string $id): JsonResponse
+    public function show(int $id): JsonResponse
     {
         $result = $this->userService->show($id);
         return $this->successResponse($result);
     }
 
-    public function update(string $id, UpdateUserRequest $updateUserRequest): JsonResponse
+    public function update(int $id, UpdateUserRequest $updateUserRequest): JsonResponse
     {
         $updateUserDto = $updateUserRequest->toUpdateUserDto();
         $result = $this->userService->update($id, $updateUserDto);
         return $this->successResponse($result);
     }
 
-    public function destroy(string $id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         $result = $this->userService->destroy($id);
+        return $this->successResponse($result);
+    }
+
+    public function me(): JsonResponse
+    {
+        $result = $this->userService->me(Auth::id());
         return $this->successResponse($result);
     }
 }

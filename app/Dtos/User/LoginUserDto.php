@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Dtos\User;
+use App\Dtos\BaseDto;
 
-class LoginUserDto
+class LoginUserDto extends BaseDto
 {
     private string $email;
     private string $password;

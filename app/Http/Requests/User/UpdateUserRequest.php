@@ -26,9 +26,10 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|min:2|max:255',
-            'email' => 'required|email',
-            'password' => 'required|string|min:4|max:255',
+            'name' => 'nullable|string|min:2|max:255',
+            'email' => 'nullable|email',
+            'password' => 'nullable|string|min:4|max:255',
+            'role' => 'nullable|integer|in:1,2,3',
         ];
     }
 
@@ -45,6 +46,7 @@ class UpdateUserRequest extends FormRequest
             $this->input('name'),
             $this->input('email'),
             $this->input('password'),
+            $this->input('role'),
         );
     }
 }
